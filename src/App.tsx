@@ -5,11 +5,8 @@ import {
   CheckCircle,
   Clock,
   Plus,
-  Search,
   Trash2,
   UserPlus,
-  ArrowRight,
-  Filter,
   LayoutDashboard,
   AlertTriangle,
   Pencil
@@ -28,7 +25,7 @@ import { supabase, TABLE_NAME, supabaseConfig } from './lib/supabase';
 const firebaseConfig = JSON.parse(__firebase_config);
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+// const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
 
 const SERVICES = [
   "General Consultation",
