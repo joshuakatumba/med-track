@@ -156,6 +156,8 @@ export default function App() {
     setPatientAge(visit.age.toString());
     setPatientGender(visit.gender);
     setSelectedService(visit.service);
+    // Switch to dashboard to show form
+    setView('dashboard');
     // Scroll to form
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -168,7 +170,7 @@ export default function App() {
     setSelectedService(SERVICES[0]);
   };
 
-  const handleCheckIn = async (e) => {
+  const handleCheckIn = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!patientName.trim() || !patientAge) return;
 
@@ -250,7 +252,7 @@ export default function App() {
     }
   };
 
-  const markAsSeen = async (id) => {
+  const markAsSeen = async (id: string) => {
     try {
       const { error } = await supabase
         .from(TABLE_NAME)
@@ -265,7 +267,7 @@ export default function App() {
     }
   };
 
-  const deleteVisit = async (id) => {
+  const deleteVisit = async (id: string) => {
     const confirmed = window.confirm('Are you sure you want to remove this record?');
     if (!confirmed) return;
     try {
@@ -292,7 +294,7 @@ export default function App() {
     const waitingToday = todayVisits.filter(v => v.status === 'waiting').length;
     const seenToday = todayVisits.filter(v => v.status === 'seen').length;
 
-    const byService = todayVisits.reduce((acc, curr) => {
+    const byService = todayVisits.reduce<Record<string, number>>((acc, curr) => {
       acc[curr.service] = (acc[curr.service] || 0) + 1;
       return acc;
     }, {});
